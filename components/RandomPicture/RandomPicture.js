@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import RandomPictureStyle from './RandomPictureStyle';
+import randomPictureStyle from './RandomPictureStyle';
 
 class Random extends Component {
   static navigationOptions = {
@@ -45,7 +45,7 @@ class Random extends Component {
 
   render() {
     return (
-      <View style={RandomPictureStyle.randomImgContainer}>
+      <View style={randomPictureStyle.randomImgContainer}>
         <TouchableOpacity onPress={this.getNewRandom}>
           <Image source={{uri: this.state.randomizer}} />
         </TouchableOpacity>

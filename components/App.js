@@ -6,12 +6,14 @@ import Loading from './Loading/Loading';
 import SignIn from './SignIn/SignIn';
 import SignOut from './SignOut/SignOut';
 import Random from './RandomPicture/RandomPicture';
+import ResultPictures from './Home/ResultPictures/ResultPictures';
 
 const appDrawer = createDrawerNavigator(
   {
     Home: Home,
-    SignOut: SignOut,
+    Result: ResultPictures,
     Random: Random,
+    SignOut: SignOut,
   },
   {
     initialRouteName: 'Home',
@@ -21,10 +23,10 @@ const appDrawer = createDrawerNavigator(
 const App = createAppContainer(
   createSwitchNavigator(
     {
-      app: appDrawer,
       login: SignIn,
-      logout: SignOut,
       loading: Loading,
+      app: appDrawer,
+      logout: SignOut,
     },
     {
       initialRouteName: 'login',

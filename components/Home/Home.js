@@ -27,39 +27,11 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      result: [],
-      page: 1,
-      apiKey: 'fG-rIGoQvQIZ2k77cHFfyh9IrQRGyr1K2b_4tgZ10ZY',
-      secretKey: 'LUs-Bro6ZxeTL3VcVCD2NKEK6if5vLQhNi3scdA0sJE',
     };
   }
 
   changeValue = text => {
     this.setState({search: text});
-  };
-
-  getPictures = () => {
-    let research = this.state.search;
-    const key = this.state.apiKey;
-    let pageNumber = this.state.page;
-    pageNumber.toString();
-    fetch(
-      'https://api.unsplash.com/photos?query=' +
-        research +
-        '&' +
-        pageNumber +
-        '&client_id=' +
-        key,
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({research: push(data)});
-        error => {
-          console.log(error);
-        };
-      });
   };
 
   render() {
@@ -72,15 +44,6 @@ class App extends Component {
             <View style={styles.appContainer}>
               <Text style={styles.titleText}> Looking for a picture? </Text>
             </View>
-            {/* <TouchableOpacity
-              style={styles.button1}
-              onPress={() =>
-                this.props.navigation.dispatch(DrawerActions.openDrawer())
-              }>
-              <Text style={styles.marginTopButton}>______</Text>
-              <Text style={styles.marginTopButton}>______</Text>
-              <Text style={styles.marginTopButton}>______</Text>
-            </TouchableOpacity> */}
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.inputText}
@@ -90,7 +53,13 @@ class App extends Component {
                 editable
               />
             </View>
-            <TouchableOpacity style={styles.button} onPress={this.getPictures}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                this.props.navigation.navigate('Result', {
+                  research: this.state.search,
+                });
+              }}>
               <Text>Let's find out</Text>
             </TouchableOpacity>
           </ScrollView>
