@@ -5,9 +5,14 @@ const SignOutStyle = StyleSheet.create({
     flex: 1,
   },
   textSignOut: {
-    marginBottom: 'auto',
-    marginTop: 'auto',
     textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: 'purple',
   },
 });
 

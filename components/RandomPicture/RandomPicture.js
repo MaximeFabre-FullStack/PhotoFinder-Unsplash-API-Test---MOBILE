@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import randomPictureStyle from './RandomPictureStyle';
 import {ScrollView} from 'react-native-gesture-handler';
 
 class Random extends Component {
@@ -34,7 +33,7 @@ class Random extends Component {
       })
       .then(data => {
         this.setState({randomizer: data[this.randomSelection(30)]});
-        console.log(this.state.randomizer.urls.small);
+        console.log(this.state.randomizer.user.first_name);
         error => {
           console.log(error);
         };
@@ -43,7 +42,7 @@ class Random extends Component {
 
   render() {
     return (
-      <ScrollView style={randomPictureStyle.randomImgContainer}>
+      <ScrollView style={[]}>
         <TouchableOpacity
           onPress={this.getNewRandom}
           style={{
@@ -53,8 +52,8 @@ class Random extends Component {
           {this.state.randomizer ? (
             <Image
               style={{
-                width: 400,
-                height: 400,
+                width: 350,
+                height: 350,
                 marginTop: 100,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -78,8 +77,26 @@ class Random extends Component {
               }}
             />
           )}
-
-          <Text>
+          <Text
+            style={{
+              color: 'purple',
+              fontSize: 18,
+              marginLeft: 'auto',
+              marginTop: 20,
+              marginRight: 50,
+              fontWeight: 'bold',
+            }}>
+            {this.state.randomizer ? this.state.randomizer.user.first_name : ''}
+          </Text>
+          <Text
+            style={{
+              color: 'purple',
+              fontSize: 18,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              fontWeight: '900',
+              fontStyle: 'italic',
+            }}>
             {this.state.randomizer ? this.state.randomizer.alt_description : ''}
           </Text>
         </TouchableOpacity>

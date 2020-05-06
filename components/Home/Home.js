@@ -60,7 +60,9 @@ class App extends Component {
                   research: this.state.search,
                 });
               }}>
-              <Text>Let's find out</Text>
+              <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                Let's find out
+              </Text>
             </TouchableOpacity>
           </ScrollView>
         </ImageBackground>

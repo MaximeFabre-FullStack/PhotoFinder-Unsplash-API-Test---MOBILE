@@ -16,7 +16,19 @@ class SignIn extends Component {
         <TouchableOpacity
           style={SignInStyle.sendSignInButton}
           onPress={() => this.props.navigation.navigate('loading')}>
-          <Text>Connexion</Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 'auto',
+              marginBottom: 'auto',
+              fontWeight: 'bold',
+              fontSize: 18,
+              color: 'purple',
+            }}>
+            Connexion
+          </Text>
         </TouchableOpacity>
       </View>
     );

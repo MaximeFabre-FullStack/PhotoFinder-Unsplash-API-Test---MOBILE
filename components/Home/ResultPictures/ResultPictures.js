@@ -19,10 +19,12 @@ class ResultPicture extends Component {
       apiKey: 'fG-rIGoQvQIZ2k77cHFfyh9IrQRGyr1K2b_4tgZ10ZY',
       secretKey: 'LUs-Bro6ZxeTL3VcVCD2NKEK6if5vLQhNi3scdA0sJE',
       numberOfPageResearch: '',
+      exist: false,
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log(this.props.navigation.getParam('research'));
     var research = this.props.navigation.getParam('research');
     if (
       prevProps.navigation.getParam('research') == research ||
@@ -50,9 +52,43 @@ class ResultPicture extends Component {
 
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <ScrollView>
-          <Text>{this.state.numberOfPageResearch}coucou</Text>
+          <Image
+            source={{
+              uri: this.state.exist
+                ? this.state.exist
+                : 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+            }}
+            style={{
+              width: 350,
+              height: 350,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginTop: 20,
+            }}
+          />
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 18,
+              marginLeft: 'auto',
+              marginTop: 20,
+              marginRight: 54,
+              fontWeight: 'bold',
+            }}>
+            Maxime F.
+          </Text>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 18,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              fontStyle: 'italic',
+            }}>
+            Voici la definition temporaire de l'image
+          </Text>
         </ScrollView>
       </SafeAreaView>
     );
