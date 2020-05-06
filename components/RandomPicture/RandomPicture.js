@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import randomPictureStyle from './RandomPictureStyle';
+import {ScrollView} from 'react-native-gesture-handler';
 
 class Random extends Component {
   static navigationOptions = {
@@ -13,30 +14,27 @@ class Random extends Component {
     };
   }
 
+  randomSelection = max => {
+    // random number from 0 to 30 to select the index of the randomizer to display
+    return Math.floor(Math.random() * Math.floor(max));
+  };
+
   componentDidMount() {
-    fetch(
-      'https://api.unsplash.com//photos?query=random&client_id=fG-rIGoQvQIZ2k77cHFfyh9IrQRGyr1K2b_4tgZ10ZY',
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({randomizer: data[0]});
-        error => {
-          console.log(error);
-        };
-      });
+    // when page mount, select a random pic
+    this.getNewRandom();
   }
 
   getNewRandom = () => {
+    // on press of T.O , select a new random pic
     fetch(
-      'https://api.unsplash.com//photos?query=random&client_id=fG-rIGoQvQIZ2k77cHFfyh9IrQRGyr1K2b_4tgZ10ZY',
+      'https://api.unsplash.com//photos?query=random&per_page=30&client_id=fG-rIGoQvQIZ2k77cHFfyh9IrQRGyr1K2b_4tgZ10ZY',
     )
       .then(response => {
         return response.json();
       })
       .then(data => {
-        this.setState({randomizer: data[0]});
+        this.setState({randomizer: data[this.randomSelection(30)]});
+        console.log(this.state.randomizer.urls.small);
         error => {
           console.log(error);
         };
@@ -45,11 +43,47 @@ class Random extends Component {
 
   render() {
     return (
-      <View style={randomPictureStyle.randomImgContainer}>
-        <TouchableOpacity onPress={this.getNewRandom}>
-          <Image source={{uri: this.state.randomizer}} />
+      <ScrollView style={randomPictureStyle.randomImgContainer}>
+        <TouchableOpacity
+          onPress={this.getNewRandom}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          {this.state.randomizer ? (
+            <Image
+              style={{
+                width: 400,
+                height: 400,
+                marginTop: 100,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              source={{
+                uri: this.state.randomizer.urls.small,
+              }}
+            />
+          ) : (
+            <Image
+              style={{
+                width: 400,
+                height: 400,
+                marginTop: 100,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              source={{
+                uri:
+                  'https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1',
+              }}
+            />
+          )}
+
+          <Text>
+            {this.state.randomizer ? this.state.randomizer.alt_description : ''}
+          </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
